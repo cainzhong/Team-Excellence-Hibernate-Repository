@@ -7,6 +7,8 @@
 package com.team.excellence.hibernate.main;
 
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -24,9 +26,18 @@ public class HelloWorld {
 		Email email=new Email();
 		email.setPrimaryEmail("abc@a.com");
 		Long emailID=(Long) session.save(email);
-		System.out.println("commit");
 		tx.commit();
 		session.close();
+		
+		Session newSession=HibernateUtil.getSessionFactory().openSession();
+		Transaction newTransaction=newSession.beginTransaction();
+		
+		List<Email> emailList=newSession.createQuery("from Email").list();
+		
+		System.out.println(emailList.size()+" record(s) found:");
+		
+		newTransaction.commit();
+		newSession.close();
 		
 		HibernateUtil.shutdown();
 	}
