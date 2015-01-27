@@ -24,6 +24,7 @@ public class HelloWorld {
 		Email email=new Email();
 		email.setPrimaryEmail("abc@a.com");
 		Long emailID=(Long) session.save(email);
+		System.out.println("commit");
 		tx.commit();
 		session.close();
 		
