@@ -12,5 +12,5 @@ create table ACCOUNT
 	password varchar(60)
 );
 
-insert into EMAIL (id,primaryEmail,secondaryEmail) values(10000,"a@a.com","a1@a.com");
+insert into EMAIL (id,primaryEmail,secondaryEmail) values(10000,'a@a.com','a1@a.com');
 	

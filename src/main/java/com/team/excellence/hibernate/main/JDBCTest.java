@@ -24,28 +24,29 @@ public class JDBCTest {
 		String password = "sa";
 		String query = "select * from Email";
 		try {
-			Class.forName(className).newInstance();
-			Connection conn = DriverManager.getConnection(url, user, null);
-			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery(query);
-			while (rs.next()) {
-				System.out.println(rs.getInt(1));
-				System.out.println(rs.getString(2));
-				System.out.println(rs.getString(3));
+			Class.forName("org.hsqldb.jdbcDriver");
+			Connection c = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost:9001/mydb","sa","");
+			if (c != null) {
+				System.out.println("Connected db success!");
+				Statement stmt = c.createStatement();
+//				String sql = "CREATE TABLE TBL_USERS(ID INTEGER, NAME VARCHAR, BIRTHDAY DATE);";
+//				stmt.execute(sql);
+//				sql = "INSERT INTO TBL_USERS(ID, NAME, BIRTHDAY) VALUES ('1', 'ADMIN', SYSDATE);";
+//				stmt.executeUpdate(sql);
+				ResultSet rs = stmt.executeQuery(query);
+				while (rs.next()) {
+					System.out.println(rs.getInt(1));
+					System.out.println(rs.getString(2));
+					System.out.println(rs.getString(3));
+				}
+				if (stmt != null) {
+					stmt.close();
+				}
+				c.close();
 			}
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
+		} catch (Exception e) {
 			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return;
 		}
-
 	}
 }
