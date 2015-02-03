@@ -20,7 +20,7 @@ public class HibernateUtil {
 	static {
 		try {
 //			sessionFactory = new Configuration().configure().buildSessionFactory();
-			sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory();
+			sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory(); 
 		} catch (Throwable ex) {
 			throw new ExceptionInInitializerError(ex);
 		}
@@ -28,6 +28,7 @@ public class HibernateUtil {
 	
 	public static SessionFactory getSessionFactory(){
 		// Alternatively, you could look up in JNDI here
+		System.out.println("*****************************************");
 		return sessionFactory;
 	}
 	

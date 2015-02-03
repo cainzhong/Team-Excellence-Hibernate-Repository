@@ -21,8 +21,10 @@ import com.team.excellence.hibernate.util.HibernateUtil;
  */
 public class HelloWorld {
 	public static void main(String args[]){
+		System.out.println("***********************11******************");
 		Session session=HibernateUtil.getSessionFactory().openSession();
 		Transaction tx=session.beginTransaction();
+		System.out.println("*****************************************");
 		Email email=new Email();
 		email.setPrimaryEmail("abc@a.com");
 		Long emailID=(Long) session.save(email);
